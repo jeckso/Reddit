@@ -1,12 +1,10 @@
 package com.jeckso.reddit.presentation.field
 
-import com.jeckso.reddit.domain.validation.base.Validator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class MutableFieldHolderImpl<T : Any>(
     initial: T? = null,
-    validators: List<Validator<T>> = emptyList(),
 ) : MutableFieldHolder<T> {
 
     private val _valueHolder: MutableStateFlow<T?> = MutableStateFlow(initial)
@@ -19,7 +17,6 @@ class MutableFieldHolderImpl<T : Any>(
 
     override val state: Flow<Result<T>> = _valueHolder
         .filterNotNull()
-        .onEach { value -> validators.forEach { it.validate(value) } }
         .flowOn(Dispatchers.Default)
         .map { Result.success(it) }
         .catch { Result.failure<T>(it) }

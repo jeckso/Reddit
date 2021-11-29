@@ -2,7 +2,6 @@ package com.jeckso.reddit
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
-import androidx.viewbinding.BuildConfig
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
