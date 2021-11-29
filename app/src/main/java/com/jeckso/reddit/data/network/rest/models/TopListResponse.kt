@@ -7,4 +7,4 @@ data class TopListResponse (
     val kind: String, // 3023
     @SerializedName("data")
     val data: Data, // 3023
-        )
+)

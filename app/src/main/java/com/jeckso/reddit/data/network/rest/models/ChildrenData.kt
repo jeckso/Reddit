@@ -22,7 +22,6 @@ data class ChildrenData(
     val created: Double, // 1638131972.0
     @SerializedName("created_utc")
     val createdUtc: Double, // 1638131972.0
-    val domain: String, // i.redd.it
     @SerializedName("downs")
     val downs: Int, // 0
     @SerializedName("gallery_data")
