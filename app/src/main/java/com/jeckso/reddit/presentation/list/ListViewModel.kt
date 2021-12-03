@@ -11,9 +11,7 @@ import com.jeckso.reddit.presentation.base.vm.BaseViewModel
 import com.jeckso.reddit.presentation.list.adapter.PostVM
 import com.jeckso.reddit.presentation.util.Failure
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,8 +23,10 @@ class ListViewModel @Inject constructor(
         const val DEFAULT_PAGE_SIZE = 10
     }
 
+    private val lastItem = MutableStateFlow("")
+
     private val postPager = pagerOf {
-        postsService.getTopPosts(DEFAULT_PAGE_SIZE, it * DEFAULT_PAGE_SIZE).data.children
+        postsService.getTopPosts(DEFAULT_PAGE_SIZE, it).data.children
     }
 
     val items: Flow<PagingData<PostVM>> = postPager.flow

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jeckso.reddit.android.adapter.OnItemClickListener
@@ -13,6 +14,7 @@ import com.jeckso.reddit.presentation.base.fragment.BaseFragment
 import com.jeckso.reddit.presentation.list.adapter.PostAdapter
 import com.jeckso.reddit.presentation.list.adapter.PostVM
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ListFragment private constructor() : BaseFragment<ListViewModel, FragmentListBinding>(),
@@ -46,6 +48,7 @@ class ListFragment private constructor() : BaseFragment<ListViewModel, FragmentL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.items.asObserverJob {
+            Timber.e("POSTS RECEIVED ${it.map { it.id }}")
             postAdapter.submitData(it)
         }
     }

@@ -12,5 +12,5 @@ interface PostsService {
     }
 
     @GET(ENDPOINT_GET_TOP_POSTS)
-    suspend fun getTopPosts(@Query("limit") limit: Int, @Query("count") count: Int): TopListResponse
+    suspend fun getTopPosts(@Query("limit") limit: Int, @Query("after") after: String): TopListResponse
 }
